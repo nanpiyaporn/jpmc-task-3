@@ -63,6 +63,7 @@ class Graph extends Component<IProps, {}> {
       this.table.update([
        DataManipulator.generateRow(this.props.data),
       ]as unknown as  TableData);
+      // work now
       //something wrong on this word!!!
       
     }
