@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table } from '@finos/perspective';
+import { Table, TableData } from '@finos/perspective';
 import { ServerRespond } from './DataStreamer';
 import { DataManipulator } from './DataManipulator';
 import './Graph.css';
@@ -12,15 +12,8 @@ interface PerspectiveViewerElement extends HTMLElement {
   load: (table: Table) => void,
 }
 
-type TableData = {
-  price_abc: number,
-  price_def: number,
-  ratio: number,
-  upper_bound: number,
-  lowwer_bound:number,
-  trigger_alert: number | undefined,
-  timestamp: Date,
-};
+
+
 class Graph extends Component<IProps, {}> {
   table: Table | undefined;
 
@@ -63,12 +56,14 @@ class Graph extends Component<IProps, {}> {
       }));
     }
   }
-
+  
+  
   componentDidUpdate() {
     if (this.table) {
       this.table.update([
-        DataManipulator.generateRow(this.props.data),
-      ] as  TableData);//something wrong on this word!!!
+       DataManipulator.generateRow(this.props.data),
+      ]as unknown as  TableData);
+      //something wrong on this word!!!
       
     }
   }
